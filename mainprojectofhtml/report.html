@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bug Report Issue</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 0;
+    background-color: #f8f9fa;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .form-group select, .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .form-group button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .form-group button:hover {
+    background-color: #0056b3;
+  }
+  .note {
+    color: #e74c3c;
+    font-style: italic;
+  }
+  .error {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px;
+    }
+    .form-group select, .form-group input {
+      padding: 8px;
+      font-size: 14px;
+    }
+    .form-group button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bug Report Issue</h1>
+    <p>You can submit your findings by sending an email to <a href="mailto:bug-bounty@winni-security.freshdesk.com">bug-bounty@winni-security.freshdesk.com</a></p>
+    <p>Before sending this email, ensure you have included all of the following details in a well-structured manner:</p>
+    <form id="bugReportForm">
+      <div class="form-group">
+        <label for="issue-type">Issue Type</label>
+        <select id="issue-type" name="issue-type" required>
+          <option value="SQL Injection">SQL Injection</option>
+          <option value="Cross-Site Scripting (XSS)">Cross-Site Scripting (XSS)</option>
+          <option value="Cross-Site Request Forgery (CSRF)">Cross-Site Request Forgery (CSRF)</option>
+          <option value="Broken Authentication">Broken Authentication</option>
+          <option value="Security Misconfiguration">Security Misconfiguration</option>
+        </select>
+        <div class="error" id="issue-type-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="issue-title">Issue Title</label>
+        <select id="issue-title" name="issue-title" required>
+          <option value="SQL Injection Vulnerability in Login Page">SQL Injection Vulnerability in Login Page</option>
+          <option value="XSS in Search Function">XSS in Search Function</option>
+          <option value="CSRF in Order Submission">CSRF in Order Submission</option>
+          <option value="Weak Password Policy">Weak Password Policy</option>
+          <option value="Sensitive Data Exposure in API Response">Sensitive Data Exposure in API Response</option>
+        </select>
+        <div class="error" id="issue-title-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="priority">Priority of Vulnerability (P1, P2, P3, P4, P5)</label>
+        <select id="priority" name="priority" required>
+          <option value="P1">P1 - Critical</option>
+          <option value="P2" selected>P2 - High</option>
+          <option value="P3">P3 - Medium</option>
+          <option value="P4">P4 - Low</option>
+          <option value="P5">P5 - Informational</option>
+        </select>
+        <div class="error" id="priority-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="domain">Domain/Subdomain</label>
+        <select id="domain" name="domain" required>
+          <option value="www.winni.in">www.winni.in</option>
+          <option value="app.winni.in">app.winni.in</option>
+          <option value="api.winni.in">api.winni.in</option>
+          <option value="admin.winni.in">admin.winni.in</option>
+        </select>
+        <div class="error" id="domain-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="url">URL/API/Page Impacted</label>
+        <select id="url" name="url" required>
+          <option value="https://www.winni.in/login">https://www.winni.in/login</option>
+          <option value="https://www.winni.in/search">https://www.winni.in/search</option>
+          <option value="https://www.winni.in/cart">https://www.winni.in/cart</option>
+          <option value="https://www.winni.in/checkout">https://www.winni.in/checkout</option>
+          <option value="https://api.winni.in/order">https://api.winni.in/order</option>
+        </select>
+        <div class="error" id="url-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="platform">Platform</label>
+        <select id="platform" name="platform" required>
+          <option value="Desktop Website" selected>Desktop Website</option>
+          <option value="Mobile Website">Mobile Website</option>
+          <option value="Android App">Android App</option>
+          <option value="iOS App">iOS App</option>
+        </select>
+        <div class="error" id="platform-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required value="John Doe">
+        <div class="error" id="name-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="mobile-number">Mobile Number</label>
+        <input type="tel" id="mobile-number" name="mobile-number" required value="+1234567890">
+        <div class="error" id="mobile-number-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email ID</label>
+        <input type="email" id="email" name="email" required value="johndoe@example.com">
+        <div class="error" id="email-error"></div>
+      </div>
+      <div class="form-group">
+        <button type="submit">Submit</button>
+      </div>
+      <p class="note">* Note: We reserve the right to outrightly reject your submission in case it is missing the above-mentioned details.</p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('bugReportForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let isValid = true;
+
+      const fields = ['issue-type', 'issue-title', 'priority', 'domain', 'url', 'platform', 'name', 'mobile-number', 'email'];
+
+      fields.forEach(field => {
+        const input = document.getElementById(field);
+        const errorDiv = document.getElementById(field + '-error');
+        if (!input.value) {
+          isValid = false;
+          errorDiv.textContent = 'This field is required.';
+        } else {
+          errorDiv.textContent = '';
+        }
+      });
+
+      if (isValid) {
+        alert('Bug report submitted successfully!');
+        document.getElementById('bugReportForm').reset();
+      }
+    });
+  </script>
+</body>
+</html>

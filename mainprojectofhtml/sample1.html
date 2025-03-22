@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .container {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("C:/Users/USER/OneDrive/Documents/FULL STACK/binduimg.webp") no-repeat center/cover;
+      }
+      .container form {
+        width: 670px;
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(30px);
+        flex-wrap: wrap;
+      }
+      .container form h1 {
+        color: #7971ec;
+        font-weight: 700;
+        line-height: 2;
+        margin-top: 20px;
+        width: 500px;
+        text-align: center;
+      }
+      .container form input {
+        width: 300px;
+        height: 50px;
+        padding-left: 10px;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        margin-bottom: 10px;
+        background: none;
+        border-bottom: 2px solid #f4d92e;
+        color: #ecf1eb;
+      }
+      .container form input::placeholder {
+        color: #3bbb4e;
+      }
+      .container form #lastName,
+      .container form #mobile {
+        margin-left: 20px;
+      }
+      .container form h4 {
+        color: #ebe129;
+        font-weight: 300;
+        width: 600px;
+        margin-top: 20px;
+      }
+      .container form textarea {
+        background: none;
+        border: none;
+        border-bottom: 2px solid #000000;
+        color: #dec25d;
+        font-weight: 200;
+        font-size: 20px;
+        padding: 10px;
+        outline: none;
+        min-height: 90px;
+        max-height: 90px;
+        min-width: 620px;
+        max-width: 620px;
+      }
+      .container form h4 {
+        font-size: 20px;
+      }
+      .container form #button {
+        border: none;
+        background: #c8e03d;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-weight: 600;
+        font-size: 24px;
+        color: #e4ecec;
+        width: 200px;
+        height: 60px;
+        padding: 0;
+        margin-bottom: 30px;
+        transition: 0.3s;
+      }
+      .container form #button:hover {
+        background: #e5974e;
+        color: #5976f5;
+        transition: 0.5s ease-in-out;
+      }
+      .success-container {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f1eded;
+        text-align: center;
+      }
+      .success-container h2 {
+        font-size: 2em;
+        color: #4caf50;
+        margin-bottom: 20px;
+      }
+      .success-container p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+      .animate-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #4caf50;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+      .animate-button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form onsubmit="handleSubmit(event)">
+        <h1>Contact Us Form</h1>
+        <input type="text" id="firstName" name="firstName" placeholder="First Name" required />
+        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="text" id="mobile" name="mobile" placeholder="Mobile" required />
+        <h4>Type Your Message Here...</h4>
+        <textarea id="message" name="message" required></textarea>
+        <input type="submit" value="Send" id="button" />
+      </form>
+    </div>
+
+    <div class="success-container">
+      <h2>Success</h2>
+      <p id="success-message"></p>
+      <a href="combine1.html" class="animate-button">Go Back to Contact Form</a>
+    </div>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        const message = 'Your message has been sent successfully!';
+        localStorage.setItem('successMessage', message);
+        document.querySelector('.container').style.display = 'none';
+        document.querySelector('.success-container').style.display = 'flex';
+        document.getElementById('success-message').textContent = message;
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var message = localStorage.getItem('successMessage');
+        if (message) {
+          document.querySelector('.container').style.display = 'none';
+          document.querySelector('.success-container').style.display = 'flex';
+          document.getElementById('success-message').textContent = message;
+          localStorage.removeItem('successMessage');
+        }
+      });
+    </script>
+  </body>
+</html>
