@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Gifts</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #e7ebf1;
+            color: white;
+            position: relative; /* Ensure positioning context for absolute positioning */
+            padding-bottom: 10px; /* Add padding to header bottom */
+        }
+
+        .top-bar {
+            height: -10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5em 1em;
+            background-color: #000000;
+            position: relative; /* Ensure relative positioning */
+        }
+
+        .top-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1em; /* Adjust gap between items */
+        }
+
+        .top-items li {
+            margin: 0;
+        }
+
+        .top-items li a {
+            color: #f4f4f4;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* Smooth transition */
+            padding: 0.5em 1em; /* Adjust padding for better hover area */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        .top-items li a:hover {
+            background-color: #f98ad8; /* Darker shade of blue on hover */
+        }
+
+        .search-delivery {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.1em; /* Add margin between top items and search bar */
+            margin-bottom: 0;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 90px; /* Adjust this value to change logo size */
+            height: 55px; /* Maintain aspect ratio */
+        }
+
+        .location-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .location-container input {
+            padding: 0.9em 0.9em 0.8em 3em;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .location-container::before {
+            content: '';
+            background: url('https://www.shutterstock.com/image-vector/pin-point-logo-can-be-600nw-1679653036.jpg') no-repeat center center;
+            background-size: 16px 16px; /* Adjust icon size */
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px; /* Icon size */
+            height: 16px; /* Icon size */
+        }
+
+        .search-bar input[type="text"] + input {
+            border-radius: 0;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .search-container input[type="text"] {
+            width: 100%;
+            padding: 0.75em;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            font-size: 1em;
+            padding-right: 40px; /* Add space for the icon */
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px; /* Adjust position as needed */
+            pointer-events: none; /* Allow clicking through the icon */
+        }
+
+        .search-icon img {
+            width: 20px; /* Adjust icon size */
+            height: 10px; /* Adjust icon size */
+        }
+
+        .search-bar button {
+            padding: 0.5em;
+            border: none;
+            background-color: #ef98ef;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar button img {
+            width: 15px; /* Adjust size as needed */
+            height: 15px; /* Adjust size as needed */
+        }
+
+        .delivery-time {
+            background-color: #d5dadc;
+            color: #444;
+            padding: 0.5em 1em;
+            font-weight: bold;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            position: relative; /* Ensure relative positioning for absolute child */
+        }
+
+        .bike-animation {
+            position: absolute;
+            top: -110%;
+            left: 0; /* Start at the left edge of the delivery-time container */
+            animation: moveBike 1s linear forwards infinite; /* Animation runs once and stops at the end */
+        }
+
+        .bike-animation img {
+            width: 120px; /* Increase bike size */
+            height: auto;
+            background: none; /* Remove any background */
+            border: none; /* Remove any border */
+        }
+
+        @keyframes moveBike {
+            0% {
+                left: 0; /* Start at the left edge */
+            }
+            100% {
+                left: calc(100% - 50px); /* Move to the right edge minus bike width */
+            }
+        }
+
+        /* Background and Gifts Styles */
+        .background {
+            top: 35vh; /* Start 10% down from the top of the viewport */
+            left: 0;
+            width: 100%;
+            height: 500px; /* Adjusted height to cover from 10% to 80% of the viewport */
+            background-image: url("https://e0.pxfuel.com/wallpapers/190/566/desktop-wallpaper-background-for-html-page-html-css.jpg");
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Send background behind other content */
+        }
+
+        .gifts-container {
+            position: absolute;
+            top: 35vh; /* Start 10% down from the top of the viewport */
+            left: 0;
+            width: 100%;
+            height: 55vh; /* Adjusted height to cover from 10% to 80% of the viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .gifts-wrapper {
+            display: flex;
+            align-items: center;
+            margin-right: 100px; /* Adjust margin between GIFs and button */
+        }
+
+        .gift-image {
+            width: 250px; /* Increase the width for larger images */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 20px; /* Adjust spacing between images */
+            opacity: 0;
+            animation: slideIn 1s ease forwards; /* Animation for sliding in */
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%); /* Start outside left boundary */
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0); /* Slide in to the center */
+            }
+        }
+
+        .submit-button {
+            position: relative;
+            top: -100px;
+            right: -1250px; /* Ensure some space from the right */
+            padding: 10px 20px;
+            background-color: #fc66bdb9;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 25px;
+            cursor: pointer;
+            z-index: 1; /* Ensure button is above other content */
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #f15bb2;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            padding: 1em;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #97dde4;
+        }
+
+        nav ul li .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #76ef9e;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            z-index: 1000;
+            flex-direction: column; /* Ensure vertical dropdown */
+        }
+
+        nav ul li .dropdown li {
+            width: 100%;
+        }
+
+        nav ul li .dropdown li a {
+            padding: 0.5em 1em;
+            background-color: #55f494;
+        }
+
+        nav ul li:hover .dropdown {
+            display: flex; /* Use flex to display dropdown vertically */
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .top-items {
+                flex-direction:column;
+                width: 100%;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                margin-top: 0.5em;
+            }
+
+            .search-bar input[type="text"] {
+                margin-bottom: 0.5em;
+                border-radius: 4px;
+            }
+
+            .search-bar button {
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .gifts-wrapper {
+                flex-direction: column;
+                margin: 0;
+            }
+
+            .gift-image {
+                width: 80%;
+                margin: 0.5em 0;
+            }
+
+            .submit-button {
+                width: 100%;
+                border-radius: 0;
+                top: auto;
+                bottom: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li .dropdown {
+                position: static;
+                flex-direction: column;
+            }
+
+            nav ul li:hover .dropdown {
+                display: none;
+            }
+
+            nav ul li a {
+                padding: 0.5em 1em;
+            }
+
+            nav ul li .dropdown li a {
+                padding: 0.5em 1em;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: 500000px;
+        }
+        #product-categories {
+  display: flex;
+  gap: 10px;
+  padding: 30px;
+  border-radius: 8px;
+}
+.category-image {
+  width: 150px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  text-align: center;
+}
+
+#product-list {
+  margin-top: 30px;
+}
+#product-details {
+  margin-top: 200px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.product-image {
+  cursor: pointer;
+  width: 50%;
+}
+.card {
+    margin-left: 30px;
+  background-color: rgb(221, 205, 221);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  transition: transform 0.6s ease;
+}
+
+.card img{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  width: 100px;
+  padding: 2px;
+  text-shadow: blueviolet;
+}
+
+.container img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.column{
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after{
+  content: "";
+  display: table;
+  clear:both;
+  margin: 10%;
+  padding: 5%;
+}
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0%;
+}
+
+*{
+  padding:0px;
+  margin:0px;
+  box-sizing:border-box;
+  outline:none;
+}
+.background {
+            position: fixed;
+            top: 0; /* Start 10% down from the top of the viewport */
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Adjusted height to cover from 10% to 80% of the viewport */
+            background-image: url("Untitled design (5).gif");
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Send background behind other content */
+        }
+
+        .gifts-container {
+
+            top: 35vh; /* Start 10% down from the top of the viewport */
+            left: 0;
+            width: 100%;
+            height: 55vh; /* Adjusted height to cover from 10% to 80% of the viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .gifts-wrapper {
+            display: flex;
+            align-items: center;
+            margin-right: 100px; /* Adjust margin between GIFs and button */
+        }
+
+        .gift-image {
+            direction: left;
+            behavior: alternate;
+            width: 250px; /* Increase the width for larger images */
+            height: 250px; /* Maintain aspect ratio */
+            margin-right: 200px; /* Adjust spacing between images */
+            opacity: 0;
+            animation: slideIn 1s ease forwards; /* Animation for sliding in */
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%); /* Start outside left boundary */
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0); /* Slide in to the center */
+            }
+        }
+
+        .submit-button {
+            position: fixed;
+            top: 80vh; /* Adjusted to start from 80% down the viewport */
+            right: 20px; /* Ensure some space from the right */
+            padding: 10px 20px;
+            background-color: #2a2628b9;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 25px;
+            cursor: pointer;
+            z-index: 1; /* Ensure button is above other content */
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #090909;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 1em;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #111212;
+        }
+
+        nav ul li .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #0f0f0f;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            z-index: 1000;
+            flex-direction: column; /* Ensure vertical dropdown */
+        }
+
+        nav ul li .dropdown li {
+            width: 100%;
+        }
+
+        nav ul li .dropdown li a {
+            padding: 0.5em 1em;
+            background-color: #080808;
+        }
+
+        nav ul li:hover .dropdown {
+            display: flex; /* Use flex to display dropdown vertically */
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .top-items {
+                flex-direction:column;
+                width: 100%;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                margin-top: 0.5em;
+            }
+
+            .search-bar input[type="text"] {
+                margin-bottom: 0.5em;
+                border-radius: 4px;
+            }
+
+            .search-bar button {
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .gifts-wrapper {
+                flex-direction: column;
+                margin: 0;
+            }
+
+            .gift-image {
+                width: 80%;
+                margin: 0.5em 0;
+            }
+
+            .submit-button {
+                width: 100%;
+                border-radius: 0;
+                top: auto;
+                bottom: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li .dropdown {
+                position: static;
+                flex-direction: column;
+            }
+
+            nav ul li:hover .dropdown {
+                display: none;
+            }
+
+            nav ul li a {
+                padding: 0.5em 1em;
+            }
+
+            nav ul li .dropdown li a {
+                padding: 0.5em 1em;
+            }
+        }
+        body {
+  font-family: Arial, sans-serif;
+  text-align: 500000px;
+}
+
+#product-categories {
+  display: flex;
+  gap: 10px;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.category-image {
+  width: 150px;
+  cursor: pointer;
+  border-radius: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  text-align: center;
+}
+
+#product-list {
+  margin-top: 30px;
+}
+
+#product-details {
+  margin-top: 200px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+.product-image {
+  cursor: pointer;
+  width: 50%;
+}
+
+.card {
+  background-color: rgb(221, 205, 221);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 20px;
+  transition: transform 0.6s ease;
+}
+.card img{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+.card:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container {
+  width: 100px;
+  padding: 2px;
+  text-shadow: blueviolet;
+}
+.container img{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+.column{
+  width: 33.33%;
+  padding: 5px;
+}
+.row::after{
+  content: "";
+  display: table;
+  clear:both;
+  margin: 10%;
+  padding: 5%;
+}
+.row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0%;
+}
+*{
+  padding:0px;
+  margin:0px;
+  box-sizing:border-box;
+  outline:none;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <ul class="top-items">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Currency-INR</a></li>
+                <li><a href="mrg.html">Corporate Gifts</a></li>
+                <li><a href="#">Track Order</a></li>
+            </ul>
+        </div>
+        <div class="search-delivery">
+            <div class="logo-container">
+                <img src="logo5.jpg" >
+            </div>
+            <div class="location-container">
+                <input type="text" placeholder="Deliverylocation">
+            </div>
+            <div class="search-bar">
+                <div class="search-container">
+                    <input type="text" placeholder="Search for gifts">
+                    <div class="search-icon">
+                        <img src="https://www.shutterstock.com/image-vector/magnifying-glass-search-icon-flat-260nw-738763579.jpg" alt="Search">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="delivery-time">
+                <span>Delivery in 10 minutes</span>
+                <div class="bike-animation">
+                    <img src="WINNI (2).gif">
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">EXPRESS</a>
+            <ul class="dropdown">
+                    <li><a href="#">SameDayDelivery</a></li>
+                    <li><a href="#">Cakes</a></li>
+                    <li><a href="#">Plants</a></li>
+                    <li><a href="#">Combos</a></li>
+                    <li><a href="#">Flowers</a></li>
+                    <li><a href="#">GiftSameDay</a></li>
+            </ul>
+            </li>
+            <li>
+                <a href="#">CAKES</a>
+                <ul class="dropdown">
+                    <li><a href="#">Birthday Cakes</a></li>
+                    <li><a href="#">Anniversary Cakes</a></li>
+                    <li><a href="#">Designer Cakes</a></li>
+                    <li><a href="#">Photo Cakes</a></li>
+                    <li><a href="#">Tuffle Cakes</a></li>
+                    <li><a href="#">Black Forest Cakes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">FLOWERS</a>
+                <ul class="dropdown">
+                    <li><a href="#">Roses</a></li>
+                    <li><a href="#">Lilies</a></li>
+                    <li><a href="#">Tulips</a></li>
+                    <li><a href="#">Mixed Bouquets</a></li>
+                    <li><a href="#">Orchids</a></li>
+                    <li><a href="#">Premium</a></li>
+                    <li><a href="#">Exotic</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">GIFTS</a>
+                <ul class="dropdown">
+                    <li><a href="#">Gift Hampers</a></li>
+                    <li><a href="#">Personalized Gifts</a></li>
+                    <li><a href="#">Soft Toys</a></li>
+                    <li><a href="#">Jewellery</a></li>
+                    <li><a href="#">Home Decors</a></li>
+                    <li><a href="#">Idols and Figurines</a></li>
+                    <li><a href="#">Birthday</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">PERSONALISED GIFTS</a>
+                <ul class="dropdown">
+                    <li><a href="#">Photo Frames</a></li>
+                    <li><a href="#">Custom Mugs</a></li>
+                    <li><a href="#">Custom T-Shirts</a></li>
+                    <li><a href="#">Custom Cushions</a></li>
+                    <li><a href="#">Key Chains</a></li>
+                    <li><a href="#">Clocks</a></li>
+                    <li><a href="#">Chocolates</a></li>
+                    <li><a href="#">Engraved Gifts</a></li>
+                </ul>
+            </li>
+            <li><a href="#">CHOCOLATES</a>
+                <ul class="dropdown">
+                    <li><a href="#">Cake & Flower Combos</a></li>
+                    <li><a href="#">Chocolate Combos</a></li>
+                    <li><a href="#">Teddy Combos</a></li>
+                    <li><a href="#">Dark Chocolates</a></li>
+                    <li><a href="#">White Chocolates</a></li>
+                    <li><a href="#">Premium Chocolates</a></li>
+                    <li><a href="#">Best Seller Chocolates</a></li>
+                    <li><a href="#">Personalised Chocolates</a></li>
+                    <li><a href="#">Chocolate Bouquet</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">COMBOS</a>
+                <ul class="dropdown">
+                    <li><a href="#">Cake & Flower Combos</a></li>
+                    <li><a href="#">Chocolate Combos</a></li>
+                    <li><a href="#">Teddy Combos</a></li>
+                    <li><a href="#">All Cake Combos</a></li>
+                    <li><a href="#">All Flower Combos</a></li>
+                    <li><a href="#">Premium Combos</a></li>
+                    <li><a href="#">Anniversary Combo</a></li>
+                    <li><a href="#">Best Seller Combo</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">BIRTHDAY</a>
+                <ul class="dropdown">
+                    <li><a href="#">Birthday Cakes</a></li>
+                    <li><a href="#">Birthday Flowers</a></li>
+                    <li><a href="#">Birthday Gifts</a></li>
+                    <li><a href="#">First Birthday Cakes</a></li>
+                    <li><a href="#">Birth Chocolates</a></li>
+                    <li><a href="#">Balloon Decorations</a></li>
+                    <li><a href="#">Birthday Plants</a></li>
+                    <li><a href="#">Birthday New Arrivals</a></li>
+                    <li><a href="#">Personalised Gifts</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">ANNIVERSARY</a>
+                <ul class="dropdown">
+                    <li><a href="#">Anniversary Cakes</a></li>
+                    <li><a href="#">Anniversary Flowers</a></li>
+                    <li><a href="#">Anniversary Gifts</a></li>
+                    <li><a href="#">Cake & Flower Combos</a></li>
+                    <li><a href="#">Chocolate Combos</a></li>
+                    <li><a href="#">Teddy Combos</a></li>
+                    <li><a href="#">25th Anniversary Cakes</a></li>
+                    <li><a href="#">Romantic & Couple Gifts</a></li>
+                    <li><a href="#">Balloon Decorations</a></li>
+                    <li><a href="#">First Anniversary Cakes</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <header>
+                <div class="search-icon">
+                    <img src="https://www.shutterstock.com/image-vector/magnifying-glass-search-icon-flat-260nw-738763579.jpg" alt="SearchS">
+                </div>
+            </div>
+            
+        </div>
+    </header>
+    <div class="background " ></div>
+    <div class="gifts-container">
+        <div class="gifts-wrapper">
+        </div>
+    
+    
+</body>
+</html>

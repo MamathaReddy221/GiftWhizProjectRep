@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <style>
+        /* CSS for alignment and animation */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        footer {
+            background-image: url('contusbg2.jpg'); /* Background image */
+            background-size: cover; /* Cover entire footer */
+            background-position: center; /* Center align background */
+            padding: 40px 0; /* Add padding top and bottom */
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap; /* Enable wrapping for multiple rows */
+            justify-content: space-between; /* Space between items */
+            align-items: flex-start; /* Align items at the top of container */
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .footer-item {
+            text-align: center;
+            color: #333; /* Text color */
+            transition: transform 0.3s ease, background-color 0.3s ease; /* Added background color transition */
+            width: calc(25% - 20px); /* Four items per row with spacing */
+            margin-bottom: 20px;
+            padding: 20px; /* Increase padding for larger rectangle */
+            background-color: #f0f0f0; /* Background color for the item */
+            border: 2px solid #007bff; /* Border color */
+            border-radius: 8px; /* Rounded corners */
+            box-sizing: border-box; /* Include border in width calculation */
+            animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+        }
+        .footer-item:hover {
+            transform: translateY(-5px); /* Hover effect */
+            background-color: #e0e0e0; /* Background color on hover */
+        }
+        .footer-item a {
+            color: inherit;
+            text-decoration: none;
+            display: block; /* Ensure icons are block-level for proper alignment */
+            margin: 0 auto 10px; /* Center icons horizontally */
+            font-size: 36px; /* Increase font size of icons */
+            transition: transform 0.3s ease; /* Add animation to icons */
+        }
+        .footer-item a:hover {
+            transform: scale(1.1); /* Scale up on hover */
+        }
+        .footer-item i {
+            color: #e966d6; /* Icon color */
+        }
+        .footer-item p {
+            margin: 10px 0; /* Adjust spacing */
+            font-size: 14px; /* Increase font size of text */
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            margin: 0 10px; /* Adjust space between icons */
+            color: #e966d6; /* Icon color */
+            font-size: 24px; /* Icon size */
+            transition: transform 0.3s ease; /* Add animation to icons */
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #1681e5;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2); /* Scale up on hover */
+            background-color:  #f77ed5;/* Darker background on hover */
+        }
+        .social-icons a i {
+            color: #fff; /* Icon color */
+            font-size: 20px; /* Adjust icon size */
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px; /* Adjust font size */
+            color: #777; /* Copyright text color */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .help-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .help-section h2 {
+            color: #f77ed5;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .help-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .help-item {
+            text-align: center;
+            color: #333;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            width: calc(30% - 20px);
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .help-item:hover {
+            transform: translateY(-5px);
+            background-color: #e0e0e0;
+        }
+        .help-item a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            margin: 0 auto 10px;
+            font-size: 36px;
+            transition: transform 0.3s ease;
+        }
+        .help-item a:hover {
+            transform: scale(1.1);
+        }
+        .help-item i {
+            color:#f77ed5;
+        }
+        .help-item p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .help-item button {
+            background-color: #f77ed5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .help-item button:hover {
+            background-color: #f17dca;
+        }
+    </style>
+</head>
+<body>
+    <footer>
+        <div class="help-section">
+        <h2><center>FREQUENTLY ASKED QUESTIONS</center></h2>
+    </div>
+        <!-- Right side content with icons -->
+        <div class="footer-container">
+            <!-- First item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <p>Need help purchasing at Winni?</p>
+            </div>
+            <!-- Second item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-gift"></i></a>
+                <p>Expected Delivery Date of Courier Products</p>
+            </div>
+            <!-- Third item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-percent"></i></a>
+                <p>Special Discounts and Deals at Winni</p>
+            </div>
+            <!-- Fourth item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-rupee-sign"></i></a>
+                <p>Winni Cancellation and Refund Policy</p>
+            </div>
+            <!-- Fifth item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-truck"></i></a>
+                <p>Customized Orders</p>
+            </div>
+            <!-- Sixth item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-users"></i></a>
+                <p>Managing my Orders</p>
+            </div>
+            <!-- Seventh item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-question"></i></a>
+                <p>Inquiries about charges</p>
+            </div>
+            <!-- Eighth item -->
+            <div class="footer-item">
+                <a href="#"><i class="fas fa-handshake"></i></a>
+                <p>Collaborate with us</p>
+            </div>
+        </div>
+
+        <!-- Help section -->
+        <div class="help-section">
+            <h2>CAN'T FIND WHAT YOU ARE LOOKING FOR?</h2>
+            <div class="help-container">
+                <!-- First help item -->
+                <div class="help-item">
+                    <a href="#"><i class="fas fa-comment-alt"></i></a>
+                    <p>Happy To Help<br>8AM to 11PM</p>
+                    <button>WRITE TO US</button>
+                </div>
+                <!-- Second help item -->
+                <div class="help-item">
+                    <a href="#"><i class="fas fa-phone-volume"></i></a>
+                    <p>Talk To Us<br>8AM to 11PM</p>
+                    <button>CALL US</button>
+                </div>
+                <!-- Third help item -->
+                <div class="help-item">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <p>Chat On WhatsApp<br>8AM to 11PM</p>
+                    <button>CHAT NOW</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social media icons -->
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-google-plus"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <!-- Copyright notice -->
+        <div class="copyright">
+            <p>© 2013 - 2024 Winni.in. All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
