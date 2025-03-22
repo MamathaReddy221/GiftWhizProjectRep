@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winni's Bug Bounty Program</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 0;
+    background-color: #f8f9fa;
+    
+  }
+  .button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .button-container a {
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  .button {
+    background-color: #e30742;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .box {
+    background-color: #e0cccc;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  .box:hover {
+    border-color: #007bff; /* Blue border color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  .box:nth-child(1) {
+    border-color: #dc3545; /* Red border color */
+  }
+  .box:nth-child(2) {
+    border-color: #ffc107; /* Yellow border color */
+  }
+  .box:nth-child(3) {
+    border-color: #28a745; /* Green border color */
+  }
+  .box:nth-child(4) {
+    border-color: #007bff; /* Blue border color */
+  }
+  .box h2 {
+    font-size: 1.2em;
+    margin-top: 0;
+    color: #f10f0f;
+    
+    }
+  
+  .box p {
+    margin-bottom: 0;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+  <div class="button-container">
+    <a href="program.html"><button class="button">Program</button></a>
+    <a href="detailsreport.html"><button class="button">Details Report</button></a>
+    <a href="issuewalloffame.html"><button class="button">Issue Wall Of Fame</button></a>
+  </div>
+  <h1>Winni's Bug Bounty Program</h1>
+  <p>
+    In an endeavor to keep our users safe, and to provide a secure shopping experience to our customers, Winni has introduced its Bug Bounty Program. If you are a bug hunter, security researcher, or a white hat hacker, and believe you have identified some security issues with Winni's platform - website or apps, we would appreciate you disclosing it to us responsibly.
+    <br>
+    Please submit a detailed description of the issue to us, along with the steps to reproduce it. Our team will investigate the security reports and resolve the issue within a reasonable time frame.
+  </p>
+
+  <h2>Responsible Disclosure Guideline</h2>
+  <p>
+    You will not publicly disclose a bug before it has been fixed.<br>
+    You will protect our users' privacy and data. You will not access or modify data without our permission.<br>
+    You will ensure no disruption to our production systems and no destruction of data during security testing.<br>
+    If any privacy violation is inadvertently caused by you while testing, you are liable to disclose it immediately to us.
+  </p>
+
+  <div class="container">
+    <div class="box">
+      <h2>Critical</h2>
+      <p>
+        Remote Code Execution (RCE) - able to execute arbitrary commands on a remote device<br>
+        SQL Injection - able to read Personally Identifiable Information (PII) or other sensitive data / full read/write access to a database<br>
+        Server-Side Request Forgery (SSRF) - able to pivot to internal application and/or access credentials (not blind)
+      </p>
+    </div>
+    <div class="box">
+      <h2>High</h2>
+      <p>
+        Stored Cross-Site Scripting (XSS) - stored XSS with access to non HttpOnly cookies<br>
+        Information Disclosure - leaked credentials<br>
+        Subdomain Takeover - on a domain that still sees traffic or would be a convincing candidate for a phishing attack
+      </p>
+    </div>
+    <div class="box">
+      <h2>Medium</h2>
+      <p>
+        CSRF - able to modify important information (authenticated)<br>
+        ATO - required user interaction<br>
+        IDOR - write access to modify objects that you do not have permission to<br>
+        XSS - reflected/DOM XSS with access to cookies
+      </p>
+    </div>
+    <div class="box">
+      <h2>Payment Manipulation</h2>
+      <p>
+        Medium<br>
+        CSRF - able to modify important information (authenticated)<br>
+        ATO - required user interaction<br>
+        IDOR - write access to modify objects that you do not have permission to<br>
+        XSS - reflected/DOM XSS with access to cookies<br>
+        Subdomain Takeover - on an unused subdomain<br>
+        Broken Session flaws<br>
+      </p>
+    </div>
+  </div>
+
+  <h2>Testing using Tools</h2>
+  <p>
+    Don't be evil. Practice safe checks. Please don't use automated scanners/scripts as those tools can be disruptive or cause sites to misbehave leading to suspension of your account.
+  </p>
+
+  <h2>Program Terms</h2>
+  <p>
+    By participating in Winni's Bug Bounty Program, you comply with Winni's terms and conditions. To qualify for a bounty, you have to meet the following requirements:
+    <ul>
+      <li>Must pertain to an item explicitly listed under our in-scope vulnerabilities section. Else our security team will take a call as per their judgment.</li>
+      <li>Must contain enough information and a proof of concept code or screenshot.</li>
+      <li>You will provide necessary assistance to Winni, if required, in resolving the security issue</li>
+      <li>We reserve the right to publish reports without your approval</li>
+    </ul>
+  </p>
+</body>
+</html>
