@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment and Checkout Example</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #008CBA;
+}
+
+button[type="submit"]:hover,
+button:hover {
+    opacity: 0.8;
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment and Checkout Example</h1>
+        
+        <form id="paymentForm">
+            <!-- <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" > -->
+            <label for="paymentmethod">Pay ment method :</label>
+            <input type="text" id="paymentmethod" name="paymentmethod" required>
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+            
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" required>
+            
+            <button type="submit">Add Payment</button>
+        </form>
+        
+        <button id="checkoutBtn">Checkout</button>
+        
+        <p id="message"></p>
+    </div>
+
+    <script >
+ document.addEventListener('DOMContentLoaded', function() {
+    const paymentForm = document.getElementById('paymentForm');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const message = document.getElementById('message');
+    let userId; // Define userId variable in the scope
+
+    function getUserIdFromSessionStorage() {
+        userId = sessionStorage.getItem('userId');
+        if (!userId) {
+            console.error('User ID not found in sessionStorage');
+            // Handle this scenario, e.g., redirect to login page or display an error message
+        }
+    }
+
+    paymentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const paymentmethod= document.getElementById('paymentmethod').value;
+        const cardNumber = document.getElementById('cardNumber').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+
+        fetch(`http://localhost:6776/user/addPaymentMethod/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                paymentmethod:paymentmethod,
+                cardNumber: cardNumber,
+                expiryDate: expiryDate
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add payment method');
+            }
+            return response.text();
+        })
+        .then(data => {
+            message.textContent = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            message.textContent = 'Failed to add payment method. Please try again later.';
+        });
+    });
+
+    checkoutBtn.addEventListener('click', function() {
+        fetch(`http://localhost:6776/user/checkout/${userId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to checkout');
+                
+                console.log(response)
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert("Checkout successful ");
+                window.location.href = 'http://127.0.0.1:5500/mainprojectofhtml/combine1.html'; // Adjust path as needed
+            message.textContent = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            message.textContent = 'Failed to checkout. Please try again later.';
+        });
+    });
+
+    getUserIdFromSessionStorage(); // Fetch userId from sessionStorage on page load
+});
+    </script>
+</body>
+</html>
