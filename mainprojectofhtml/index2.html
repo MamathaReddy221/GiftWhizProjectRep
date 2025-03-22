@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Products and Add to Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Your CSS styles */
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Corporate Gifts</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- Add any additional navigation items if needed -->
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <!-- Example Cart Icon and Counter (for demo) -->
+                <a href="GetAllCart.html" class="btn btn-outline-success my-2 my-sm-0 mr-2">
+                    Cart <span class="badge badge-light" id="cartBadge">0</span>
+                </a>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Product Details Modal -->
+    <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailsModalLabel">Product Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="productDetailsContent">
+                    <!-- Product details will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row" id="productsList">
+            <!-- Products will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for certain components like dropdowns, modals, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let userId; // Placeholder for user ID
+
+            // Function to fetch all products from the backend
+            function fetchProducts() {
+                fetch('http://localhost:6776/user/allProduct')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch products');
+                        }
+                        return response.json();
+                    })
+                    .then(products => {
+                        // Once products are fetched successfully, render them
+                        console.log('Fetched products:', products);
+                        renderProducts(products);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching products:', error);
+                        alert('Failed to fetch products. Please try again later.');
+                    });
+            }
+
+            // Function to render products on the UI
+            function renderProducts(products) {
+                const productsListElement = document.getElementById('productsList');
+                productsListElement.innerHTML = ''; // Clear previous content
+
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('col-md-4', 'product-card');
+
+                    productCard.innerHTML = `
+                        <div class="card">
+                            <img class="product-image" src="data:${product.imageMimeType};base64,${product.imageData}" alt="${product.productName}" data-product-id="${product.id}">
+                            <div class="card-body">
+                                <h3 class="card-title">${product.productName}</h3>
+                                <p class="card-text">${product.productDescription}</p>
+                                <p class="card-text">Price: $${product.productPrice}</p>
+                                <button class="btn btn-primary add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-success buy-now-btn" data-product-id="${product.id}" data-product-name="${product.productName}" data-product-price="${product.productPrice}">Buy Now</button>
+                            </div>
+                        </div>
+                    `;
+
+                    productsListElement.appendChild(productCard);
+                });
+                // Add event listeners to buttons
+                addEventListenersToButtons();
+                addEventListenersToImages();
+            }
+
+            // Function to add event listeners to all buttons
+            function addEventListenersToButtons() {
+                // Add event listeners to "Add to Cart" buttons
+                const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+                addToCartBtns.forEach(btn => {
+                    btn.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const productId = btn.dataset.productId; // Ensure this retrieves the correct product ID
+                        addToCart(productId, 1); // Example quantity, modify as per your requirements
+                    });
+                });
+
+                // Add event listeners to "Buy Now" buttons
+                const buyNowBtns = document.querySelectorAll('.buy-now-btn');
+                buyNowBtns.forEach(btn => {
+                    btn.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const productId = btn.dataset.productId; // Ensure this retrieves the correct product ID
+                        const productName = btn.dataset.productName; // Product name
+                        const productPrice = btn.dataset.productPrice; // Product price
+                        const quantity = 1; // Example quantity, modify as per your requirements
+                        buyNow(productId, productName, productPrice, quantity); // Example quantity, modify as per your requirements
+                    });
+                });
+            }
+            function addEventListenersToImages() {
+                const productImages = document.querySelectorAll('.product-image');
+                productImages.forEach(img => {
+                    img.addEventListener('click', function() {
+                        const productId = img.dataset.productId;
+                        openProductDetailsModal(productId);
+                    });
+                });
+            }
+            // Function to open product details modal
+            function openProductDetailsModal(productId) {
+            fetch(`http://localhost:6776/user/product/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch product details');
+                    }
+                    return response.json();
+                })
+                .then(product => {
+                    // Populate modal with product details
+                    const modalTitle = document.getElementById('productDetailsModalLabel');
+                    modalTitle.textContent = product.productName + ' Details';
+
+                    const modalBody = document.getElementById('productDetailsContent');
+                    modalBody.innerHTML = `
+                        <p><strong>Name:</strong> ${product.productName}</p>
+                        <p><strong>Description:</strong> ${product.productDescription}</p>
+                        <p><strong>Price:</strong> $${product.productPrice}</p>
+                        <img src="data:${product.imageMimeType};base64,${product.imageData}" class="img-fluid rounded" alt="${product.productName}">
+                    `;
+
+                    // Show the modal
+                    $('#productDetailsModal').modal('show');
+                })
+                .catch(error => {
+                    console.error('Error fetching product details:', error);
+                    alert('Failed to fetch product details. Please try again later.');
+                });
+        }
+
+
+            // Function to add product to cart (example)
+            function addToCart(productId, quantity) {
+                // Example POST request to add product to cart
+                fetch(`http://localhost:6776/user/saveCart/${userId}/${quantity}/${productId}`, {
+                    method: 'POST',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add item to cart');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Item added to cart:', data);
+                    alert("Item added to cart successfully!");
+                    updateCartBadge(); // Update cart count (example: increment the badge number)
+                })
+                .catch(error => {
+                    console.error('Error adding item to cart:', error);
+                    alert('Failed to add item to cart. Please try again later.');
+                });
+            }
+
+            // Function to perform "Buy Now" operation (example)
+            function buyNow(productId, productName, productPrice, quantity) {
+                fetch(`http://localhost:6776/user/saveCart/${userId}/${quantity}/${productId}`, {
+                    method: 'POST',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add item to cart');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    if (typeof data === 'string') {
+                        console.log('Item added to cart:', data);
+                        alert("Item added to cart successfully! Redirecting to payment page...");
+                        // Redirect to payment page (adjust URL as per your application)
+                        window.location.href = `http://127.0.0.1:5500/mainprojectofhtml/paymentandcheck.html`;
+                    } else {
+                        throw new Error('Invalid JSON response from server');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding item to cart:', error);
+                    alert(`Failed to add item to cart. Error: ${error.message}`);
+                });
+            }
+
+            // Function to update cart badge (example)
+            function updateCartBadge() {
+                const cartBadge = document.getElementById('cartBadge');
+                cartBadge.textContent = parseInt(cartBadge.textContent) + 1;
+            }
+
+            // Function to get user ID (placeholder, replace with actual logic)
+            function getUserIdFromSessionStorage() {
+                userId = sessionStorage.getItem('userId');
+                // userId = 1; // Placeholder for demo
+            }
+
+            // Call functions to initialize
+            getUserIdFromSessionStorage();
+            fetchProducts();
+        });
+    </script>
+</body>
+</html>
