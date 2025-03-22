@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f6f2;
+            padding: 20px;
+        }
+        .product-card {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .card-body {
+            flex: 1;
+            padding: 15px;
+        }
+        .btn-primary {
+            border-radius: 20px;
+            width: 100px;
+            margin-top: 10px;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .cart-item {
+            display: flex;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            margin-right: 20px;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .remove-from-cart-btn {
+            margin-left: auto;
+        }
+        .total-price {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 style="font-family: fantasy;">Cart</h1>
+            <!-- <img id="cartImage" src="cart-icon.png" alt="Cart"> -->
+        </div>
+        <div>
+            <a href="http://127.0.0.1:5500/mainprojectofhtml/index2.html" class=" btn btn-danger">back</a>
+            <a href="http://127.0.0.1:5500/mainprojectofhtml/login.html" class=" btn btn-danger">logout</a>
+        </div>
+    </header>
+
+    <main class="mt-5">
+        <div class="container">
+            <section id="cartItems">
+                <!-- Cart items will be dynamically populated here -->
+            </section>
+            <div class="total-price">
+                Total: <span id="totalAmount">$0</span>
+            </div>
+            <a href="http://127.0.0.1:5500/mainprojectofhtml/paymentandcheck.html" class=" btn btn-danger">checkout</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const totalAmountElement = document.getElementById('totalAmount');
+
+            fetchCartItems(); // Fetch cart items on page load
+
+            function fetchCartItems() {
+                const userId = sessionStorage.getItem('userId');
+                if (!userId) {
+                    console.error('User ID not available');
+                    // Optionally redirect to login page or display message to user
+                    return;
+                }
+                fetch(`http://localhost:6776/user/getAllCart/${userId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch cart items');
+                        }
+                        return response.json();
+                    })
+                    .then(cartItems => {
+                        console.log('Fetched cart items:', cartItems);
+                        renderCartItems(cartItems);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cart items:', error);
+                        // Optionally display an error message to the user
+                    });
+            }
+
+            function renderCartItems(cartItems) {
+                cartItemsContainer.innerHTML = ''; // Clear previous content
+
+                let totalPrice = 0;
+
+                cartItems.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                        <img class="cart-item-image" src="data:${item.product.imageMimeType};base64,${item.product.imageData}" alt="${item.product.productName}">
+                        <div class="cart-item-details">
+                            <h3>${item.product.productName}</h3>
+                            <p>Quantity: ${item.quantity}</p>
+                            <p>Price: $${item.product.productPrice}</p>
+                        </div>
+                        <button class="remove-from-cart-btn btn btn-danger" data-item-id="${item.id}">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(cartItemElement);
+
+                    totalPrice += item.product.productPrice * item.quantity;
+                });
+
+                totalAmountElement.textContent = `$${totalPrice.toFixed(2)}`;
+
+                // Add event listeners to "Remove" buttons
+                addEventListenersToRemoveButtons();
+            }
+
+            function addEventListenersToRemoveButtons() {
+                const removeButtons = document.querySelectorAll('.remove-from-cart-btn');
+                removeButtons.forEach(button => {
+                    button.addEventListener('click', function(event) {
+                        const itemId = button.getAttribute('data-item-id');
+                        removeFromCart(itemId);
+                    });
+                });
+            }
+
+            function removeFromCart(itemId) {
+                fetch(`http://localhost:6776/user/delete/${itemId}`, {
+                    method: 'DELETE',
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to remove item from cart');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Item removed from cart:', data);
+                    fetchCartItems(); // Refresh cart items after removal
+                })
+                .catch(error => {
+                    console.error('Error removing item from cart:', error);
+                    // Optionally display an error message to the user
+                });
+            }
+        });
+    </script>
+</body>
+</html>
