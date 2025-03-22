@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>About Us - Winni's Tale</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+           background: url('homebg.jpg')  no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Added margin bottom for separation */
+        }
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .title {
+            font-size: 1.8em;
+            color: #d35400;
+            margin: 10px 0 5px;
+            font-family: 'Georgia', serif;
+            text-align: center; /* Center align the title */
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: #d35400;
+            margin-bottom: 20px;
+            text-align: center; /* Center align the subtitle */
+        }
+        .content {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .small-text {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+            text-align: center; /* Center align the small text */
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between squares */
+            justify-content: center;
+           /* background-color: rgba(255, 255, 255, 0.9); /* Background color for features section */
+            padding: 20px; /* Added padding */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between squares in a row */
+            margin-bottom: 20px; /* Space between rows */
+        }
+        .feature {
+            width: 200px; /* Fixed width for square */
+            height: 200px; /* Fixed height for square */
+            background-color: #fff;
+            border: 2px solid #f5e8e8; /* Border around each square */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .feature:hover {
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+        }
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .feature p {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+        }
+        .features-heading {
+            font-size: 2.5rem;
+            color: #151414; /* Font color */
+            font-style: italic; /* Italic font style */
+            margin-top: 40px; /* Adjusted margin top */
+            margin-bottom: 20px; /* Margin below heading */
+            text-align: center; /* Center align the heading */
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px; /* Reduced gap between images */
+            max-width: 30cm; /* Set the maximum width of the container */
+            margin: 0 auto; /* Center the container */
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-item {
+            flex: 1 1 calc(50% - 10px); /* Adjusted width to fit within 30cm */
+            max-width: calc(50% - 10px); /* Ensure the images do not exceed 50% of the container width */
+            margin: 5px; /* Reduced margin to minimize space */
+            aspect-ratio: 1 / 1; /* Make images square */
+            overflow: hidden;
+        }
+        .image-item:hover img {
+            transform: scale(1.1); /* Scale up image on hover */
+        }
+        @media (max-width: 768px) {
+            .image-item {
+                flex: 1 1 100%; /* Stack images on smaller screens */
+                max-width: 100%; /* Ensure the images take full width on smaller screens */
+            }
+        }
+        .heading {
+            font-size: 2em;
+            color: #ea220f;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <img src="home.jpg" alt="Home Image">
+        </div>
+        <div class="content">
+            <h1 class="title">About Us</h1>
+            <p class="subtitle">We Could Be Your Santa</p>
+            <p>Delivering Happiness To Foster Your Relationships, Covering Over 20 Million Customers Around The Globe</p>
+            <h2 class="subtitle">The Winni’s Tale</h2>
+            <p>Since Winni’s inception in 2013, we have been successful in redefining the horizons of e-retailing cakes, flowers, gifts & more
+                , and making online surfing for our customers much more handy. We bring you an exclusive range of goodies and doorstep delivery services so reliable, that you would not have to sweat about the order once it's placed. Our 09 years journey has its share of lows & highs. From taking the baby steps to sprinting fast to become India’s one-stop solution for everyone’s gifting needs!</p>
+                <p class="small-text">Contact Us: example@winni.com | Phone: +123456789</p>
+            </div>
+        </div>
+    <h1>Our Features</h1>
+        <div class="features">
+            <div class="row">
+                <div class="feature">
+                    <i class="far fa-eye"></i>
+                    <p>1 Billion+<br>Page Views</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-download"></i>
+                    <p>500K+<br>App Installs</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-boxes"></i>
+                    <p>Over 100K<br>SKUs</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <p>4000<br>Partners</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="feature">
+                    <i class="fas fa-store"></i>
+                    <p>120+<br>Retail Stores</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-globe"></i>
+                    <p>20,000<br>Pincodes Covered</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="heading">#CelebrateWithWinni</div>
+        <div class="image-container">
+            <div class="row">
+                <div class="image-item">
+                    <img src="a1.jpeg" alt="Image 1">
+                </div>
+                <div class="image-item">
+                    <img src="a2.jpeg" alt="Image 2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="image-item">
+                    <img src="a3.jpeg" alt="Image 3">
+                </div>
+                <div class="image-item">
+                    <img src="a4.jpeg" alt="Image 4">
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    
