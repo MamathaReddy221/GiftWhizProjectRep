@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylep1.css"> 
+    
+</head>
+<body>
+    <body >
+      <a href="http://127.0.0.1:5500/index3.html">
+      <button class="glow-on-hover" type="button" >HOME</button></a>
+<div class="container">
+    <section class="paymentInformation">
+      <h3>Payment Information</h3>
+      <ul>
+        
+        <li>
+          <div class="col-span-100">
+            <input type="text" id="nameOnCard" name="nameOnCard" placeholder="Name on Card" />
+          </div>
+        </li>
+        <li>
+          <div class="col-span-100">
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Credit Card #" />
+          </div>
+        </li>
+        
+        <li>
+          <div class="col-span-50">
+            <select class="thickGrayDblBorder" id="expMonth" name="expMonth">
+              <option value="-1">Expiration Month</option>
+            </select>
+          </div>
+          <div class="col-span-50">
+              <select class="thickGrayDblBorder"  id="expYear" name="expYear">
+                <option value="-1">Expiration Year</option>
+              </select>
+          </div>
+        </li>
+        <li>
+          <div class="col-span-50">
+            <input type="text" id="securityCode" name="securityCode" placeholder="Security Code" />
+          </div>
+          <div class="col-span-50">
+              <a href="http://127.0.0.1:5500/payment.html" class="smallPrint whatIsThis">What is this?</a>
+              <img src="https://s.cdpn.io/6209/cc_Icon.png" />
+          </div>
+        </li>
+        <p class="smallPrint col-span-100">
+          Charge my credit card $12.00 total for the first 12 weeks of my Wall Street Journal subscription. Thereafter, service will continue and my credit card will be charged monthly at the prevailing rate, currently $26.99. Sales tax may apply. I will be notified in advance of any price increase. For questions about my subscription or to discontinue, I can call Customer Service at 1-800-JOURNAL (568-7625).
+        </p>
+      </ul>
+    </section>
+    
+    <section class="deliveryAddress">
+      <h3>Delivery Address</h3>
+      <ul>
+        <li>
+          <div class="col-span-33">
+            <input type="text" id="shipHouseNumber" name="shipHouseNumber" placeholder="House #" /> 
+          </div>
+          <div class="col-span-66">
+            <input type="text" id="shipStreetName" name="shipStreetName" placeholder="Street Name" />
+          </div>
+        </li>
+        
+        <li>
+          <div class="col-span-100">
+           <input type="text" id="shipAddress2" name="shipAddress2" placeholder="Apt / Suite / Floor # (if applicable)" />
+          </div>
+          </li>
+        <li>
+          <div class="col-span-100">
+          <input type="text" id="shipCity" name="shipCity" placeholder="City" />
+          </div>
+          </li>
+        <li>
+          <div class="col-span-50">
+          <select class="thickGrayDblBorder" id="shipState" name="shipState">
+            <option value="-1">State</option>
+          </select>
+          </div>
+          <div class="col-span-50">
+          <input type="text" id="shipZip" name="shipZip" placeholder="Zipcode" />
+          </div>
+          </li>
+        <li class="smallPrint">
+          <div class="col-span-100">
+            Newspaper delivery is only available in the contiguous U.S.<br/>Sales tax may apply.
+          </div>
+          </li>
+        
+          <li>
+            <div class="col-span-100 grayBg fauxTable">
+              <div class="fauxTableCell vertMiddle">
+                <label for="chkBillingDifferent">Billing Address is different than delivery address</label>
+                <input type="checkbox" name="chkBillingDifferent" id="chkBillingDifferent" value="1" />
+              </div>
+            </div>
+        </li>
+      </ul>
+    </section>
+   
+    <section class="accountInformation">
+      <h3>Account Information</h3>
+      <div class="col-span-100 grayBg fauxTable">
+        <div class="fauxTableCell vertMiddle">
+        <input type="checkbox" id="chkHasAccount" name="chkHasAccount" value="1" />
+      <label for="chkHasAccount" class="overRide-floatRight">I already have a WSJ.com account</label>
+        </div>
+      </div>
+        <h4>Or Create A New Account</h4>
+      <ul>
+        <li>
+          <div class="col-span-50">
+          <input type="text" id="acctFirstName" name="acctFirstName" placeholder="First Name" />
+          </div>
+          <div class="col-span-50">
+          <input type="text" id="acctLastName" name="acctLastName" placeholder="Last Name" />
+          </div>
+        </li>
+        <li>
+          <div class="col-span-50">
+          <input type="text" id="acctEmail" name="acctEmail" placeholder="Email (this is your login)" />
+            </div>
+          <div class="col-span-50">
+          <input type="text" id="acctEmailConfirm" name="acctEmailConfirm" placeholder="Confirm Email" />
+            </div>
+        </li>
+        <li>
+          <div class="col-span-50">
+          <input type="password" id="acctPassword" name="acctPassword" placeholder="Password" />
+          </div>
+          <div class="col-span-50">
+          <input type="password" id="acctPasswordConfirm" name="acctPasswordConfirm" placeholder="Confirm Password" />
+        </div>
+        </li>
+        <li class="smallPrint">
+          <p class="col-span-100">Must be 5-15 characters long and include at least one number</p>
+          .</li>
+          <li>
+            <p class="col-span-100">Phone Number (for customer service)</p>
+            
+            </li>
+        <li>
+          <div class="col-span-100 grayBg">
+            
+            
+              <div class="phoneBox"><input type="type" step="1" id="acctPhoneAreaCode" name="acctAreaCode" placeholder="XXX" /></div> 
+              <div class="phoneBox"><input type="type" id="acctPhonePrefix" name="acctPhonePrefix" placeholder="XXX" /></div>  
+              <div class="phoneBox"><input type="type" id="acctPhoneSuffix" name="acctPhoneSuffix" placeholder="XXX" /></div> 
+              
+            
+          </div>
+          </li>
+        <li>
+          <div class="col-span-100">
+          <select class="thickGrayDblBorder">
+            <option value="-1">Select Security Question (for password recovery)</option>
+          </select>
+          </div>
+        </li>
+        <li>
+          <div class="col-span-100">
+          <input type="text" id="acctSecurityAnswer" name="acctSecurityAnswer" placeholder="Security Question Answer" />
+          </div>
+          </li>
+      </ul>
+    </section>
+    
+    <section class="emailUpdates">
+      <h3>Email Updates</h3>
+      <ul>
+        <li>
+          <div class="col-span-100">
+            <input class="overRide-noHeight" type="checkbox" id="chkReceiveUpdates" name="chkReceiveUpdates" value="1" checked="checked"/>
+            <label class="overRide-floatRight" for="chkReceiveUpdates">Receive updates and special offers from Dow Jones.</label>
+          </div>
+          </li>
+        <li>
+          <div class="col-span-100">
+          <input class="overRide-noHeight" type="checkbox" id="ckhReceiveOffers" name="ckhReceiveOffers" value="1" />
+          <label class="overRide-floatRight" for="ckhReceiveOffers">Receive special offers sent by Dow Jones on behalf of select advertisers.</label>
+          </div>
+          </li>
+      </ul>
+    </section>
+    
+    <section class="subscriberAgreement">
+      <h3>Subscriber Agreement</h3>
+      <ul>
+        <li>
+          <div class="col-span-100">
+          <input class="overRide-noHeight" type="checkbox" id="chkSubAgree" name="chkSubAgree" value="1" />
+          <label class="overRide-floatRight" for="chkSubAgree">You must read and agree to out <a href="#">Subscriber Agreement</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+          </li>
+        <li>
+          <div class="col-span-100">
+            <a href="http://127.0.0.1:5500/payment.html">
+            <input type="submit" class="btn" id="btnComplete" name="btnComplete" value="Complete Purchase »" /></a>
+          </div>
+          </li>
+        <li>
+          <div class="col-span-100 smallPrint">
+          <p>*Introductory pricing is only available to households or customers at a business address who have not been subscribers to The Wall Street Journal within the last 180 days. If you respond to this offer but do not qualify for introductory pricing, we reserve the right to reject your order or prorate your subscription term to reflect current subscriber pricing. This offer is only available in the contiguous U.S. and may be withdrawn at any time. Sales tax may apply.</p>
+          <p>Please note that your subscription will renew automatically unless you cancel prior to renewal.</p>
+          <p>Our secure server software encrypts information to protect your transaction.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+    
+  </div>
+  </body>
+</body>
+</html>
